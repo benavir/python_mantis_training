@@ -17,7 +17,7 @@ class SessionHelper:
     def logout(self):
         wd = self.app.wd
         wd.find_element_by_link_text("Logout").click()
-        wd.find_element_by_xpath("//input[@name='user']")
+        # wd.find_element_by_xpath("//input[@name='user']")
 
     def is_logged_in(self):
         wd = self.app.wd
