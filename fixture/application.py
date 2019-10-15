@@ -1,6 +1,8 @@
 from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.james import JamesHelper
+from fixture.signup import SignupHelper
+from fixture.mail import MailHelper
 
 
 class Application:
@@ -17,7 +19,9 @@ class Application:
         self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
         self.james = JamesHelper(self)
-        self.base_url=base_url
+        self.signup = SignupHelper(self)
+        self.mail = MailHelper(self)
+        self.base_url = base_url
 
     def is_valid(self):
         try:

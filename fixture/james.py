@@ -1,5 +1,6 @@
 from telnetlib import Telnet
 
+
 class JamesHelper:
 
     def __init__(self, app):
@@ -18,11 +19,9 @@ class JamesHelper:
         def __init__(self, host, port, username, password):
             self.telnet = Telnet(host, port, 5)
             self.read_until("Login id:")
-            # self.write(username + "\n")
-            self.write(username)
+            self.write(username + "\n")
             self.read_until("Password:")
-            # self.write(password + "\n")
-            self.write(password)
+            self.write(password + "\n")
             self.read_until("Welcome root. HELP for a list of commands")
 
         def read_until(self, text):
@@ -32,7 +31,7 @@ class JamesHelper:
             self.telnet.write(text.encode('ascii'))
 
         def is_user_registered(self, username):
-            self.write("veryfy %s\n" % username)
+            self.write("verify %s\n" % username)
             res = self.telnet.expect([b"exists", b"does not exist"])
             return res[0] == 0
 

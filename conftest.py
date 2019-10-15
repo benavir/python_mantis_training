@@ -38,15 +38,17 @@ def configure_server(request, config):
         restore_server_configuration(config['ftp']['host'], config['ftp']['username'], config['ftp']['password'])
     request.addfinalizer(fin)
 
-def install_server_configuration(host, username,password):
-    with ftputil.FTPHost(host, username,password) as remote:
+
+def install_server_configuration(host, username, password):
+    with ftputil.FTPHost(host, username, password) as remote:
         if remote.path.isfile("config_inc.php.bak"):
             remote.remove("config_inc.php.bak")
         if remote.path.isfile("config_inc.php"):
             remote.rename("config_inc.php", "config_inc.php.bak")
         remote.upload(os.path.join(os.path.dirname(__file__), "resources/config_inc.php"), "config_inc.php")
 
-def restore_server_configuration(host, username,password):
+
+def restore_server_configuration(host, username, password):
     with ftputil.FTPHost(host, username, password) as remote:
         if remote.path.isfile("config_inc.php.bak"):
             if remote.path.isfile("config_inc.php"):
