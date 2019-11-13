@@ -27,7 +27,6 @@ class ProjectHelper:
         # fill project form
         self.fill_project_form(project)
         # submit project creation
-        wd.find_element_by_xpath("//input[@value='Add Project']").click()
         wd.find_element_by_link_text("Proceed").click()
         self.open_projects_page()
         self.project_cache = None
