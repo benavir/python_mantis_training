@@ -5,14 +5,14 @@ import random
 def test_delete_some_project(app, check_ui):
     app.session.login("administrator", "root")
     assert app.session.is_logged_in_as("administrator")
-    if len(app.get_contact_list()) == 0:
+    if len(app.project.get_project_list()) == 0:
         app.project.create_project(Project(name="delete"))
     old_projects = app.project.get_project_list()
     project = random.choice(old_projects)
-    app.contact.delete_project_by_id(project.id)
+    app.project.delete_project(project)
     new_projects = app.project.get_project_list()
-    assert len(old_contacts) - 1 == len(new_contacts)
-    old_contacts.remove(contact)
-    assert old_contacts == new_contacts
+    assert len(old_projects) - 1 == len(new_projects)
+    old_projects.remove(project)
+    assert old_projects == new_projects
     if check_ui:
-        assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+        assert sorted(old_projects, key=lambda prj: prj.name) == sorted(new_projects, key=lambda prj: prj.name)

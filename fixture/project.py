@@ -60,3 +60,17 @@ class ProjectHelper:
                 self.project_cache.append(Project(name = name, status = status, inherit_global = inherit_global,
                                                   view_state = view_state, description = description))
         return list(self.project_cache)
+
+    def delete_project(self, project):
+        wd = self.app.wd
+        self.select_project(project)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        self.open_projects_page()
+        self.project_cache = None
+
+    def select_project(self, project):
+        wd = self.app.wd
+        self.open_projects_page()
+        wd.find_element_by_link_text(str(project.name)).click()
