@@ -3,8 +3,8 @@ import random
 
 
 def test_delete_some_project(app, check_ui):
-    app.session.login("administrator", "root")
-    assert app.session.is_logged_in_as("administrator")
+    # app.session.login("administrator", "root")
+    # assert app.session.is_logged_in_as("administrator")
     if len(app.project.get_project_list()) == 0:
         app.project.create_project(Project(name="delete"))
     old_projects = app.project.get_project_list()

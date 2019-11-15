@@ -9,8 +9,8 @@ def random_string(maxlen):
 
 
 def test_add_project(app, check_ui):
-    app.session.login("administrator", "root")
-    assert app.session.is_logged_in_as("administrator")
+    # app.session.login("administrator", "root")
+    # assert app.session.is_logged_in_as("administrator")
     project = Project(name=random_string(5), description=random_string(10))
     old_projects = app.project.get_project_list()
     app.project.create_project(project)
