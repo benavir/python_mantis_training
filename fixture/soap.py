@@ -1,5 +1,6 @@
 from suds.client import Client
 from suds import WebFault
+from model.project import Project
 
 
 class SoapHelper:
@@ -18,9 +19,11 @@ class SoapHelper:
     def get_projects_list(self, username, password):
         client = Client("http://localhost/mantisbt-1.2.20/api/soap/mantisconnect.php?wsdl")
         projects_list = client.service.mc_projects_get_user_accessible(username=username, password=password)
-        names = []
+        self.projects = []
         for elements in projects_list:
+            ids = elements.id
             names = elements.name
-        # тут надо чтобы возвращался список названий групп а не список (буквы) последней группы
-        return list(names)
+            descriptions = elements.description
+            self.projects.append(Project(id=ids, name=names, description=descriptions))
+        return list(self.projects)
         # return list(client.service.mc_projects_get_user_accessible(username=username, password=password))
