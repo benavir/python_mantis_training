@@ -20,4 +20,5 @@ def test_add_project(app, check_ui):
     assert len(old_projects) + 1 == len(new_projects)
     old_projects.append(project)
     if check_ui:
-        assert sorted(old_projects, key=lambda prj: prj.name) == sorted(new_projects, key=lambda prj: prj.name)
+        assert sorted(old_projects, key=Project.id_or_max) == sorted(new_projects, key=Project.id_or_max)
+        # assert sorted(old_projects, key=lambda prj: prj.name) == sorted(new_projects, key=lambda prj: prj.name)
