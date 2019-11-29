@@ -17,4 +17,5 @@ def test_delete_some_project(app, check_ui):
     old_projects.remove(project)
     assert old_projects == new_projects
     if check_ui:
-        assert sorted(old_projects, key=lambda prj: prj.name) == sorted(new_projects, key=lambda prj: prj.name)
+        assert sorted(old_projects, key=Project.id_or_max) == sorted(new_projects, key=Project.id_or_max)
+        # assert sorted(old_projects, key=lambda prj: prj.name) == sorted(new_projects, key=lambda prj: prj.name)
